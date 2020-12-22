@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import *
 import numpy as np
 import sys
 
-
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()

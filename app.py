@@ -69,8 +69,9 @@ class App(QMainWindow):
         mainMenu = self.menuBar()
         mainMenu.setNativeMenuBar(False)
 
+        # load modules from folder /Buoi 
         self.modules = modules = moduleToDict(__import__('Buoi'))
-
+        
         # add data to menus
         syllabus = []
         for alias in modules:
