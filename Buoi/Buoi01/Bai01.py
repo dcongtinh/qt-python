@@ -4,7 +4,10 @@ from PyQt5.QtWidgets import *
 import numpy as np
 import sys
 
+# Config tên này để đổi tên trên menu
+name = 'Hình vuông nội tiếp hình tròn'
 
+# Class Window cần phải có
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -45,6 +48,8 @@ class Window(QMainWindow):
                          self.width()/2, self.height()/2 + 200)
 
 
+# Phần bên dưới nên dùng để chạy khi test
+# Không được thực thi trong app.py
 if __name__ == '__main__':
     # create pyqt5 app
     App = QApplication(sys.argv)
