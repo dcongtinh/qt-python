@@ -4,4 +4,4 @@
 
 #
 # Ví dụ bên dưới
-from . import Buoi01, Buoi02, Buoi03
+from . import Buoi01, Buoi02, Buoi03, Buoi04
