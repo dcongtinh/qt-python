@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import *
 import numpy as np
 import sys
 
+name = 'Khảo sát'
+
 
 class Window(QMainWindow):
     def __init__(self):

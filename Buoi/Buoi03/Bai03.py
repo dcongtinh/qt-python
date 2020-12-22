@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import *
 import numpy as np
 import sys
 
+name = '21 Stars'
+
 
 class Window(QMainWindow):
     def __init__(self):
@@ -19,25 +21,25 @@ class Window(QMainWindow):
         self.draw21Stars(painter)
 
     def drawStar(self, painter, P, kc):
-        P.setY(P.y()-kc/2);
-        Q = self.dichuyen(P, kc, 72);
-        painter.drawLine(P, Q);
+        P.setY(P.y() - kc/2)
+        Q = self.dichuyen(P, kc, 72)
+        painter.drawLine(P, Q)
 
-        P = Q;
-        Q = self.dichuyen(P, kc, -72-72);
-        painter.drawLine(P, Q);
+        P = Q
+        Q = self.dichuyen(P, kc, -72-72)
+        painter.drawLine(P, Q)
 
-        P = Q;
-        Q = self.dichuyen(P, kc, 0);
-        painter.drawLine(P, Q);
+        P = Q
+        Q = self.dichuyen(P, kc, 0)
+        painter.drawLine(P, Q)
 
-        P = Q;
-        Q = self.dichuyen(P, kc, 72+72);
-        painter.drawLine(P, Q);
+        P = Q
+        Q = self.dichuyen(P, kc, 72+72)
+        painter.drawLine(P, Q)
 
-        P = Q;
-        Q = self.dichuyen(P, kc, -72);
-        painter.drawLine(P, Q);
+        P = Q
+        Q = self.dichuyen(P, kc, -72)
+        painter.drawLine(P, Q)
 
     def draw21Stars(self, painter):
         x = self.width()/2
@@ -46,10 +48,13 @@ class Window(QMainWindow):
         painter.setPen(QPen(Qt.black, 2))
         self.drawStar(painter, P, 200)
         painter.setPen(QPen(Qt.black, 1))
+
+        P = QPointF(x, y)
         for i in range(10):
             Q = self.dichuyen(P, 150, i*36)
             self.drawStar(painter, Q, 20)
 
+        P = QPointF(x, y)
         for i in range(10):
             Q = self.dichuyen(P, 240, i*36)
             self.drawStar(painter, Q, 50)
