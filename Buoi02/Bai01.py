@@ -9,30 +9,30 @@ class Window(QMainWindow):
     def __init__(self):
         super().__init__()
         # set the title
-        self.setWindowTitle("Buoi01 - Bai03")
+        self.setWindowTitle("Buoi02 - Bai01")
         self.setGeometry(300, 200, 800, 600)
 
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing, True)
 
-        self.drawHouse(painter)
+        self.drawKhaoSat(painter)
 
-    def drawHouse(self, painter):
-        points = QPolygonF([
-            QPointF(150/2, 0),
-            QPointF(0, 150),
-            QPointF(0, 300),
-            QPointF(150, 300),
-            QPointF(150, 150),
-            QPointF(150/2, 0),
-        ])
+    def drawKhaoSat(self, painter):
+        painter.setPen(Qt.red)
 
-        painter.setBrush(Qt.white)
-        painter.drawRect(20, 20, 20, 150)
-        painter.drawPolygon(points, 6)
-        painter.drawRect(30, 150+150/2, 50, 150/2)
-        painter.drawRect(150/2+20, 150+150/4, 30, 150/4)
+        painter.drawLine(0, 0, 200, 0)
+        painter.drawLine(0, 0, 0, 200)
+
+        painter.drawRect(0, 0, 100, 50)
+
+        painter.translate(200, 100)
+
+        painter.rotate(30)
+        painter.setPen(Qt.blue)
+        painter.drawLine(0, 0, 200, 0)
+        painter.drawLine(0, 0, 0, 200)
+        painter.drawRect(0, 0, 100, 50)
 
 
 if __name__ == '__main__':

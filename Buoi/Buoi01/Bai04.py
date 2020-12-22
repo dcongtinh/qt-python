@@ -9,7 +9,7 @@ class Window(QMainWindow):
     def __init__(self):
         super().__init__()
         # set the title
-        self.setWindowTitle("This is a title")
+        self.setWindowTitle("Buoi01 - Bai04")
         self.setGeometry(300, 200, 800, 600)
 
     def paintEvent(self, event):
@@ -26,11 +26,11 @@ class Window(QMainWindow):
         painter.setPen((pen))
         for i in range(8):
             for j in range(8):
-                if ((i%2) ^ (j%2)):
+                if ((i % 2) ^ (j % 2)):
                     painter.setBrush(Qt.black)
                 else:
-                    painter.setBrush(Qt.white);
-                painter.drawRect(x + j*50, y + i*50, 50, 50);
+                    painter.setBrush(Qt.white)
+                painter.drawRect(x + j*50, y + i*50, 50, 50)
 
 
 if __name__ == '__main__':
