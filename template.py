@@ -18,7 +18,7 @@ class Window(QMainWindow):
 
         self.drawSomething(painter)
 
-    def drawCircle(self, painter):
+    def drawSomething(self, painter):
         # code here
         pass
 
