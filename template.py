@@ -20,6 +20,7 @@ class Window(QMainWindow):
 
     def drawSomething(self, painter):
         # code here
+        painter.drawLine(0, 0, 100, 100)
         pass
 
 
