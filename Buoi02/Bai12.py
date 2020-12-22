@@ -10,7 +10,7 @@ class Window(QMainWindow):
         super().__init__()
         # set the title
         self.setWindowTitle("Buoi02 - Bai12")
-        self.setGeometry(300, 200, 800, 600)
+        self.setGeometry(300, 150, 800, 600)
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -25,7 +25,6 @@ class Window(QMainWindow):
             q = QPoint(40*(1 + 2*3) - p.y() + abs(p.x() - 40*3), p.x())
             painter.drawEllipse(q, 1, 1)
             p = q
-
 
 
 if __name__ == '__main__':

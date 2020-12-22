@@ -10,7 +10,7 @@ class Window(QMainWindow):
         super().__init__()
         # set the title
         self.setWindowTitle("Buoi01 - Bai02")
-        self.setGeometry(300, 200, 800, 600)
+        self.setGeometry(300, 150, 800, 600)
 
     def paintEvent(self, event):
         painter = QPainter(self)

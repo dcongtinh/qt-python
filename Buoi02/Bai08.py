@@ -10,7 +10,7 @@ class Window(QMainWindow):
         super().__init__()
         # set the title
         self.setWindowTitle("Bai02 - Buoi08")
-        self.setGeometry(300, 200, 800, 600)
+        self.setGeometry(300, 150, 800, 600)
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -29,10 +29,11 @@ class Window(QMainWindow):
             poly << QPoint(d.x() - w/2, d.y() + h)
             poly << QPoint(d.x() - w/2, d.y() + h/3)
             poly << d
-            painter.drawRect(d.x() - w/3, d.y(), w/6, h/3) # Ve ong khoi
+            painter.drawRect(d.x() - w/3, d.y(), w/6, h/3)  # Ve ong khoi
             painter.drawPolygon(poly)
-            painter.drawRect(d.x() - w/4, d.y() + 2*h/3, w/4, h/3) # Ve cua chinh
-            painter.drawRect(d.x() + w/6, d.y() + h/2, w/6, h/6) # Ve cua so
+            painter.drawRect(d.x() - w/4, d.y() + 2*h /
+                             3, w/4, h/3)  # Ve cua chinh
+            painter.drawRect(d.x() + w/6, d.y() + h/2, w/6, h/6)  # Ve cua so
         elif transform == "flipX":
             poly << self.doixungX(d, d.y())
             poly << self.doixungX(QPoint(d.x() + w/2, d.y() + h/3), d.y())
@@ -42,14 +43,18 @@ class Window(QMainWindow):
             poly << self.doixungX(d, d.y())
             # p ong khoi
             p_khoi = self.doixungX(QPoint(d.x() - w/3, d.y()), d.y())
-            painter.drawRect(p_khoi.x(), p_khoi.y() - h/3, w/6, h/3) # Ve ong khoi
+            painter.drawRect(p_khoi.x(), p_khoi.y() - h /
+                             3, w/6, h/3)  # Ve ong khoi
             painter.drawPolygon(poly)
             # p cua chinh
-            p_cuachinh = self.doixungX(QPoint(d.x() - w/4, d.y() + 2*h/3), d.y())
-            painter.drawRect(p_cuachinh.x(), p_cuachinh.y() - h/3, w/4, h/3) # Ve cua chinh
+            p_cuachinh = self.doixungX(
+                QPoint(d.x() - w/4, d.y() + 2*h/3), d.y())
+            painter.drawRect(p_cuachinh.x(), p_cuachinh.y() -
+                             h/3, w/4, h/3)  # Ve cua chinh
             # p cua so
             p_cuaso = self.doixungX(QPoint(d.x() + w/6, d.y() + h/2), d.y())
-            painter.drawRect(p_cuaso.x(), p_cuaso.y() - h/6, w/6, h/6) # Ve cua so
+            painter.drawRect(p_cuaso.x(), p_cuaso.y() -
+                             h/6, w/6, h/6)  # Ve cua so
         elif transform == "flipY":
             poly << self.doixungY(d, d.x())
             poly << self.doixungY(QPoint(d.x() + w/2, d.y() + h/3), d.x())
@@ -59,14 +64,18 @@ class Window(QMainWindow):
             poly << self.doixungY(d, d.x())
             # p ong khoi
             p_khoi = self.doixungY(QPoint(d.x() - w/3, d.y()), d.x())
-            painter.drawRect(p_khoi.x()-w/6, p_khoi.y(), w/6, h/3) # Ve ong khoi
+            painter.drawRect(p_khoi.x()-w/6, p_khoi.y(),
+                             w/6, h/3)  # Ve ong khoi
             painter.drawPolygon(poly)
             # p cua chinh
-            p_cuachinh = self.doixungY(QPoint(d.x() - w/4, d.y() + 2*h/3), d.x())
-            painter.drawRect(p_cuachinh.x() - w/4, p_cuachinh.y(), w/4, h/3) # Ve cua chinh
+            p_cuachinh = self.doixungY(
+                QPoint(d.x() - w/4, d.y() + 2*h/3), d.x())
+            painter.drawRect(p_cuachinh.x() - w/4,
+                             p_cuachinh.y(), w/4, h/3)  # Ve cua chinh
             # p cua so
             p_cuaso = self.doixungY(QPoint(d.x() + w/6, d.y() + h/2), d.x())
-            painter.drawRect(p_cuaso.x() - w/6, p_cuaso.y(), w/6, h/6) # Ve cua so
+            painter.drawRect(p_cuaso.x() - w/6, p_cuaso.y(),
+                             w/6, h/6)  # Ve cua so
 
     def drawNgoiLang(self, painter):
         x = self.width()/2
@@ -92,6 +101,7 @@ class Window(QMainWindow):
         pnew.setY(p.y())
 
         return pnew
+
 
 if __name__ == '__main__':
     # create pyqt5 app
