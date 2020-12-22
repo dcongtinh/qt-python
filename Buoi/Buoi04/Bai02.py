@@ -6,7 +6,7 @@ import sys
 from functools import partial
 from math import cos, sin
 
-name = 'Vẽ con lắc'
+name = 'Chuyển động tròn'
 
 class Window(QMainWindow):
     def __init__(self):

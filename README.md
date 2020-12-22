@@ -9,5 +9,6 @@ Cấu trúc thư mục
 |-----Bai02.py
 |---Buoi02
 |---Buoi03
+|---__init.py__
 ```
 Xem mẫu trong các folder để config file ```__init__.py``` cho các thư mục
