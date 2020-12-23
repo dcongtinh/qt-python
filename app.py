@@ -103,7 +103,7 @@ class App(QMainWindow):
 
         self.vLayout = QBoxLayout(QBoxLayout.TopToBottom, self)
 
-        self.exerciseSelectHandler({'syllabus': 'Buoi03', 'exercise': 'Bai04'})
+        # self.exerciseSelectHandler({'syllabus': 'Buoi03', 'exercise': 'BaiBonus'})
         self.show()
 
     def exerciseSelectHandler(self, config):
