@@ -55,9 +55,8 @@ class Window(QMainWindow):
         painter.drawRect(150, 350, 12*d, 25)
 
     def dichuyen(self, p, kc, huong):
-        pnew = QPointF()
-        pnew.setX(p.x() + kc*np.cos(np.pi*huong/180))
-        pnew.setY(p.y() + kc*np.sin(np.pi*huong/180))
+        pnew = QPointF(p.x() + kc*np.cos(np.pi*huong/180),
+                       p.y() + kc*np.sin(np.pi*huong/180))
         return pnew
 
 

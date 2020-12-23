@@ -8,11 +8,14 @@ from math import cos, sin, tan, sqrt
 from random import randint
 
 name = 'Hoa tuyết rơi'
+
+
 class Snowflake:
     def __init__(self, position, size, angle):
         self.position = position
-        self.size = size 
+        self.size = size
         self.angle = angle
+
 
 class Window(QMainWindow):
     def __init__(self):
@@ -42,8 +45,6 @@ class Window(QMainWindow):
     def drawSnowflake(self, painter, P, l, k, startAngle):
         x3 = l*np.sqrt(2)/80.
         x1 = x3/np.sin(np.pi*30/180)
-        x2 = x3*np.tan(np.pi*60/180)
-        w = (l - x2 - 8*l/10 - x3)/2
         # move to P
         self.currentPosition = P
         self.angle = startAngle
@@ -67,9 +68,8 @@ class Window(QMainWindow):
             self.xoay(90)
             self.dichuyen(painter, l/40)
 
-            # painter.drawLine(self.currentPosition, QPointF(self.currentPosition.x(), self.currentPosition.y()+500)) # debug
             self.xoay(90)
-            self.dichuyen(painter, l/5-l/(40*sqrt(3))) # sqrt(3) = tan(60*np.pi/180)
+            self.dichuyen(painter, l/5-l/(40*sqrt(3)))
             self.xoay(-120)
             self.dichuyen(painter, l/5)
 
@@ -111,8 +111,9 @@ class Window(QMainWindow):
 
         painter.setPen(Qt.white)
         for flake in self.flakes:
-            self.drawSnowflake(painter, flake.position, flake.size, 6, self.angle)
-    
+            self.drawSnowflake(painter, flake.position,
+                               flake.size, 6, self.angle)
+
     def newFlake(self, pos=None):
         size = randint(2, 6)*10
         if not pos:
@@ -130,11 +131,12 @@ class Window(QMainWindow):
         if not len(self.flakes):
             # generate stars
             for i in range(self.maxSnowflake):
-                self.flakes.append(self.newFlake(pos=QPointF(randint(0, self.width()), randint(0, self.width()))))
+                self.flakes.append(self.newFlake(pos=QPointF(
+                    randint(0, self.width()), randint(0, self.width()))))
         # calculate target color of stars for next frame
         for i in range(len(flakes)):
             flakes[i].angle += 3
-            if flakes[i].angle > 360: 
+            if flakes[i].angle > 360:
                 flakes[i].angle -= 360
 
             curPos = flakes[i].position
@@ -144,6 +146,7 @@ class Window(QMainWindow):
             curPos = QPointF(curPos.x(), curPos.y() + 4)
             flakes[i].position = curPos
         self.repaint()
+
 
 if __name__ == '__main__':
     # create pyqt5 app

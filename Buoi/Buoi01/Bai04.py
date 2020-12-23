@@ -21,8 +21,8 @@ class Window(QMainWindow):
         self.drawBoard(painter)
 
     def drawBoard(self, painter):
-        x = 200
-        y = 100
+        x = self.width()/2 - 200
+        y = self.height()/2 - 200
         pen = QPen()
         pen.setWidth(1)
         painter.setPen((pen))
