@@ -28,8 +28,8 @@ class Window(QMainWindow):
         )
 
     def drawMultiEllipse(self, painter):
-        x = self.width()/2
-        y = self.height()/2
+        x = self.width()/2 + 50
+        y = self.height()/2 - 50
         rx = 50
         ry = 150
         p = QPoint(x, y)

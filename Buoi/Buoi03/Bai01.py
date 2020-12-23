@@ -48,9 +48,8 @@ class Window(QMainWindow):
         self.drawPolyspiral(painter, Q, -170, 2.5)
 
     def dichuyen(self, p, kc, huong):
-        pnew = QPointF()
-        pnew.setX(p.x() + kc*np.cos(np.pi*huong/180))
-        pnew.setY(p.y() + kc*np.sin(np.pi*huong/180))
+        pnew = QPointF(p.x() + kc*np.cos(np.pi*huong/180),
+                       p.y() + kc*np.sin(np.pi*huong/180))
         return pnew
 
 

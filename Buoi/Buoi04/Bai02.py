@@ -8,6 +8,7 @@ from math import cos, sin
 
 name = 'Chuyển động tròn'
 
+
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -20,17 +21,18 @@ class Window(QMainWindow):
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        self.paintCircle(painter, 200, 80, 30, True)   
+        painter.setRenderHint(QPainter.Antialiasing, True)
+        self.paintCircle(painter, 200, 80, 30, True)
 
     def paintCircle(self, painter, trajectoryRadius, circleRadius, smallCircleRadius, renderCenter):
         self.angle += 5
         if (self.angle > 360):
-            self.angle -=360
+            self.angle -= 360
 
         center = QPoint(self.width()/2, self.height()/2)
         r = trajectoryRadius
         p = QPointF(
-            r*cos(self.angle/180.0*3.14)+center.x(), 
+            r*cos(self.angle/180.0*3.14)+center.x(),
             r*sin(self.angle/180.0*3.14)+center.y()
         )
 
@@ -41,6 +43,7 @@ class Window(QMainWindow):
 
     def handleTimer(self):
         self.repaint()
+
 
 if __name__ == '__main__':
     # create pyqt5 app

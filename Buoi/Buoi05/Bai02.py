@@ -7,6 +7,7 @@ from functools import partial
 from math import cos, sin
 name = 'Đồng hồ chạy'
 
+
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -23,17 +24,18 @@ class Window(QMainWindow):
 
     def getPointInCircle(self, center, r, angle):
         return QPoint(
-            center.x() + r * cos (- angle / 180 * 3.14),
-            center.y() + r * sin (- angle / 180 * 3.14)
+            center.x() + r * cos(- angle / 180 * 3.14),
+            center.y() + r * sin(- angle / 180 * 3.14)
         )
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        painter.setRenderHint(painter.Antialiasing)
+        painter.setRenderHint(painter.Antialiasing, True)
         painter.setPen(QPen(Qt.black, 2))
         painter.setBrush(Qt.black)
         center = QPoint(self.width()/2, self.height()/2)
-        painter.drawRoundedRect(QRect(center.x()-250, center.y()-250, 500, 500), 30, 30)
+        painter.drawRoundedRect(
+            QRect(center.x()-250, center.y()-250, 500, 500), 30, 30)
         painter.setBrush(Qt.white)
         painter.drawEllipse(center, 240, 240)
         painter.setBrush(Qt.black)
@@ -61,10 +63,10 @@ class Window(QMainWindow):
             fheight = fm.height()
             path.addText(QPoint(p.x()-fwidth/2, p.y() + fheight/4), font, st)
             fi -= 360//12
-        
+
         # paint the path onto screen
         painter.drawPath(path)
-        
+
     def handleTimer(self):
         # change the angles:
         angle = 6
@@ -74,12 +76,13 @@ class Window(QMainWindow):
         self.minuteAngle -= angle
         if (self.minuteAngle < -360*60):
             self.minuteAngle += 360*60
-        self.hourAngle -= angle * 30.0 / 6 
+        self.hourAngle -= angle * 30.0 / 6
         if (self.hourAngle < -360*3600):
             self.hourAngle += 360*3600
 
         # then repaint frame
         self.repaint()
+
 
 if __name__ == '__main__':
     # create pyqt5 app

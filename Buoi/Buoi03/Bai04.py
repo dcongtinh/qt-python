@@ -12,7 +12,7 @@ class Window(QMainWindow):
     def __init__(self):
         super().__init__()
         # set the title
-        self.setWindowTitle("Buoi03 - Bai03")
+        self.setWindowTitle("Buoi03 - Bai04")
         self.setGeometry(300, 150, 900, 800)
         self.angle = 0
         self.currentPosition = 0
@@ -34,7 +34,7 @@ class Window(QMainWindow):
         # k parts
         for _ in range(0, k):
             self.xoay(-30)
-            self.dichuyen(painter, x1)
+            self.dichuyen(painter, x1, drawLine=False)
             self.xoay(30)
             self.dichuyen(painter, l*4/10)
             self.xoay(-60)
@@ -80,7 +80,7 @@ class Window(QMainWindow):
             self.xoay(-60)
             self.dichuyen(painter, l*2/5)
             self.xoay(30)
-            self.dichuyen(painter, x1)
+            self.dichuyen(painter, x1, drawLine=False)
 
             self.xoay(150)
             self.xoay(360/k)
@@ -94,16 +94,14 @@ class Window(QMainWindow):
         L = 0.5 * min(self.width(), self.height())
         self.drawBongTuyet(painter, p, L, 6)
 
-    def dist(self, p, q):
-        return np.sqrt((p.x() - q.x())**2 + (p.y() - q.y())**2)
-
-    def dichuyen(self, painter, kc):
+    def dichuyen(self, painter, kc, drawLine=True):
         p = self.currentPosition
         pnew = QPointF(
             p.x() + kc*np.cos(3.14*self.angle/180),
             p.y() + kc*np.sin(3.14*self.angle/180)
         )
-        painter.drawLine(p, pnew)
+        if drawLine:
+            painter.drawLine(p, pnew)
         self.currentPosition = pnew
 
     def xoay(self, alpha):

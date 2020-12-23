@@ -8,12 +8,15 @@ from math import cos, sin
 from random import randint
 
 name = 'Bầu trời sao lấp lánh'
+
+
 class Star:
     def __init__(self, position, size, currentColor):
         self.position = position
-        self.size = size 
+        self.size = size
         self.currentColor = currentColor
         self.targetColor = currentColor
+
 
 class Window(QMainWindow):
     def __init__(self):
@@ -27,6 +30,7 @@ class Window(QMainWindow):
 
     def paintEvent(self, event):
         painter = QPainter(self)
+        painter.setRenderHint(QPainter.Antialiasing, True)
         painter.setBrush(Qt.black)
         painter.drawRect(QRect(0, 0, self.width(), self.height()))
         for i in range(len(self.stars)):
@@ -36,20 +40,20 @@ class Window(QMainWindow):
             self.drawStar(painter, pos, size, QColor(c, c, c))
 
     def drawStar(self, painter, center, h, color):
-            real_h = h * 0.8
-            edge = h - real_h
-            painter.setPen(Qt.NoPen)
-            painter.setBrush(QBrush(color))
-            a = QPolygonF()
-            a += QPointF(center.x() - edge, center.y() - edge)
-            a += QPointF(center.x(), center.y() - h)
-            a += QPointF(center.x() + edge, center.y() - edge)
-            a += QPointF(center.x() + h, center.y())
-            a += QPointF(center.x() + edge, center.y() + edge)
-            a += QPointF(center.x(), center.y() + h)
-            a += QPointF(center.x() - edge, center.y() + edge)
-            a += QPointF(center.x() - h, center.y())
-            painter.drawPolygon(a, 8)
+        real_h = h * 0.8
+        edge = h - real_h
+        painter.setPen(Qt.NoPen)
+        painter.setBrush(QBrush(color))
+        a = QPolygonF()
+        a += QPointF(center.x() - edge, center.y() - edge)
+        a += QPointF(center.x(), center.y() - h)
+        a += QPointF(center.x() + edge, center.y() - edge)
+        a += QPointF(center.x() + h, center.y())
+        a += QPointF(center.x() + edge, center.y() + edge)
+        a += QPointF(center.x(), center.y() + h)
+        a += QPointF(center.x() - edge, center.y() + edge)
+        a += QPointF(center.x() - h, center.y())
+        painter.drawPolygon(a, 8)
 
     def handleTimer(self):
         stars = self.stars
@@ -58,11 +62,12 @@ class Window(QMainWindow):
             for i in range(self.maxStars):
                 currentColor = randint(0, 255)
                 size = randint(6, 20)
-                pos = QPointF(randint(0, self.width()), randint(0, self.height()))
+                pos = QPointF(randint(0, self.width()),
+                              randint(0, self.height()))
                 self.stars.append(
                     Star(
                         position=pos,
-                        size=size, 
+                        size=size,
                         currentColor=currentColor
                     )
                 )
@@ -71,12 +76,15 @@ class Window(QMainWindow):
             if (stars[i].currentColor < stars[i].targetColor):
                 stars[i].currentColor += 1
                 if (stars[i].currentColor == stars[i].targetColor):
-                    stars[i].targetColor = (0 if stars[i].targetColor == 255 else 255)
+                    stars[i].targetColor = (
+                        0 if stars[i].targetColor == 255 else 255)
             else:
                 stars[i].currentColor -= 1
                 if (stars[i].currentColor == stars[i].targetColor):
-                    stars[i].targetColor = (0 if stars[i].targetColor == 255 else 255)
+                    stars[i].targetColor = (
+                        0 if stars[i].targetColor == 255 else 255)
         self.repaint()
+
 
 if __name__ == '__main__':
     # create pyqt5 app

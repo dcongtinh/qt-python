@@ -7,6 +7,7 @@ from functools import partial
 
 name = 'Megan di chuyển'
 
+
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -15,25 +16,33 @@ class Window(QMainWindow):
         self.timer.timeout.connect(self.handleTimer)
         self.timer.start(100)
         self.position = 0
-
-        self.megaman = QPixmap("./Assets/megaman.png")
-        self.megamanIndex = 0
-        self.megamanWidth = 33
-        self.scale = 8
+        self.img = 0
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        scale = self.scale
-        src = QRect(self.megamanIndex * self.megamanWidth, 0, self.megamanWidth, self.megaman.height())
-        dst = QRect(
-            (self.width()-self.megamanWidth*scale)//2, (self.height()-self.megaman.height()*scale)//2,
-            self.megamanWidth*scale, self.megaman.height()*scale
-        )
-        painter.drawPixmap(dst, self.megaman, src)
-        
+        painter.setRenderHint(QPainter.Antialiasing, True)
+
+        self.drawMegaman(painter)
+
+    def drawMegaman(self, painter):
+        spritesheet = QPixmap("./Assets/Megaman.png")
+        w_img = spritesheet.width()/10
+        h_img = spritesheet.height()
+
+        r = 10
+        # Tạo một cửa sổ có tọa độ và kích thước phù hơp vói ảnh nhỏ
+        displayWindow = QRect(w_img*self.img, 0, w_img, h_img)
+
+        position = QRect(self.position * r, self.height()/2, w_img*2, h_img*2)
+        painter.drawPixmap(position, spritesheet, displayWindow)
+
     def handleTimer(self):
-        self.megamanIndex = (self.megamanIndex + 1) % (self.megaman.width()//self.megamanWidth)
+        self.position += 1
+        self.img += 1
+        if self.img == 10:
+            self.img = 0
         self.repaint()
+
 
 if __name__ == '__main__':
     # create pyqt5 app

@@ -56,34 +56,16 @@ class Window(QMainWindow):
         painter.setBrush(QColor(Qt.black))
         painter.drawEllipse(p2, r/10, r/10)
 
-    def quay(self, p, c, delta):
-        pnew = QPoint()
-        goc = delta*np.pi/180
-        dx = p.x() - c.x()
-        dy = p.y() - c.y()
-        pnew.setX(int(c.x() + dx * np.cos(goc) - dy * np.sin(goc)))
-        pnew.setY(int(c.y() + dx * np.sin(goc) + dy * np.cos(goc)))
-        return pnew
-
     def tinhtien(self, p, tx, ty):
-        pnew = QPoint()
-        pnew.setX(p.x() + tx)
-        pnew.setY(p.y() + ty)
-
+        pnew = QPoint(p.x() + tx, p.y() + ty)
         return pnew
 
     def doixungX(self, p, y):
-        pnew = QPoint()
-        pnew.setX(p.x())
-        pnew.setY(2*y - p.y())
-
+        pnew = QPoint(p.x(), 2*y - p.y())
         return pnew
 
     def doixungY(self, p, x):
-        pnew = QPoint()
-        pnew.setX(2*x - p.x())
-        pnew.setY(p.y())
-
+        pnew = QPoint(2*x - p.x(), p.y())
         return pnew
 
 

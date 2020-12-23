@@ -91,17 +91,11 @@ class Window(QMainWindow):
         self.drawNgoiNha(painter, QPoint(600, 300), w, h, "flipX")
 
     def doixungX(self, p, y):
-        pnew = QPoint()
-        pnew.setX(p.x())
-        pnew.setY(2*y - p.y())
-
+        pnew = QPoint(p.x(), 2*y - p.y())
         return pnew
 
     def doixungY(self, p, x):
-        pnew = QPoint()
-        pnew.setX(2*x - p.x())
-        pnew.setY(p.y())
-
+        pnew = QPoint(2*x - p.x(), p.y())
         return pnew
 
 

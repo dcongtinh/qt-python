@@ -30,13 +30,14 @@ class Window(QMainWindow):
         self.currentPosition = None
         self.angle = 0
 
-    def dichuyen(self, painter, kc):
+    def dichuyen(self, painter, kc, drawLine=True):
         p = self.currentPosition
         pnew = QPointF(
             p.x() + kc*np.cos(3.14*self.angle/180),
             p.y() + kc*np.sin(3.14*self.angle/180)
         )
-        painter.drawLine(p, pnew)
+        if drawLine:
+            painter.drawLine(p, pnew)
         self.currentPosition = pnew
 
     def xoay(self, alpha):
@@ -52,7 +53,7 @@ class Window(QMainWindow):
         # k parts
         for _ in range(0, k):
             self.xoay(-30)
-            self.dichuyen(painter, x1)
+            self.dichuyen(painter, x1, drawLine=False)
             self.xoay(30)
             self.dichuyen(painter, l*4/10)
             self.xoay(-60)
@@ -99,7 +100,7 @@ class Window(QMainWindow):
             self.xoay(-60)
             self.dichuyen(painter, l*2/5)
             self.xoay(30)
-            self.dichuyen(painter, x1)
+            self.dichuyen(painter, x1, drawLine=False)
 
             self.xoay(150)
             self.xoay(360/k)

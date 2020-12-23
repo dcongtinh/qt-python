@@ -24,12 +24,11 @@ class Window(QMainWindow):
         return np.random.randint(n)
 
     def quay(self, p, c, delta):
-        pnew = QPoint()
         goc = delta*np.pi/180
         dx = p.x() - c.x()
         dy = p.y() - c.y()
-        pnew.setX(int(c.x() + dx * np.cos(goc) - dy * np.sin(goc)))
-        pnew.setY(int(c.y() + dx * np.sin(goc) + dy * np.cos(goc)))
+        pnew = QPoint(int(c.x() + dx * np.cos(goc) - dy * np.sin(goc)),
+                      int(c.y() + dx * np.sin(goc) + dy * np.cos(goc)))
         return pnew
 
     def drawBongHoa(self, painter):
