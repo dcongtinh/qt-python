@@ -51,7 +51,7 @@ class App(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.title = 'Mô phỏng đồ hoạ máy tính'
+        self.title = 'Đồ hoạ máy tính'
         self.left = 300
         self.top = 150
         self.width = 900
@@ -69,6 +69,7 @@ class App(QMainWindow):
         mainMenu = self.menuBar()
         mainMenu.setNativeMenuBar(False)
 
+        # load modules from folder /Buoi 
         self.modules = modules = moduleToDict(__import__('Buoi'))
 
         # add data to menus
@@ -105,15 +106,18 @@ class App(QMainWindow):
 
     def exerciseSelectHandler(self, config):
         # load exercise first
-
         exercise = self.modules[config['syllabus']][config['exercise']]
         if self.currentExerciseWindow:
+            # delete it in current window
             self.currentExerciseWindow.deleteLater()
 
+        # allocate new window 
         self.currentExerciseWindow = window = exercise.Window()
         self.vLayout.addWidget(window)
         self.setCentralWidget(window)
 
+        # set current title
+        self.setWindowTitle('Đồ hoạ máy tính - %s' % getattr(exercise, 'name', config['exercise']))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
