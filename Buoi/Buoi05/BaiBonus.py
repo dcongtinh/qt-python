@@ -107,6 +107,9 @@ class Window(QMainWindow):
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setBrush(Qt.black)
+        painter.drawRect(0, 0, self.width(), self.height())
+
+        painter.setPen(Qt.white)
         for flake in self.flakes:
             self.drawSnowflake(painter, flake.position, flake.size, 6, self.angle)
     
