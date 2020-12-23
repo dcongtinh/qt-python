@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import *
 import numpy as np
 import sys
 
-name = '21 Stars'
+name = 'Bông Tuyết'
 
 
 class Window(QMainWindow):
@@ -36,7 +36,7 @@ class Window(QMainWindow):
             y = Q.y()
             Q = self.dichuyen(painter, Q, l*4/10, 0*t + k)
             w = (l - x2 - 8*l/10 - x3)/2
-            painter.drawLine(Q, self.dichuyen(painter, Q, w, 0))
+            painter.drawLine(Q, self.dichuyen(painter, Q, w, 0)) # vẽ 1 đoạn nhỏ để coi chơi
             Q = self.dichuyen(painter, Q, l*3/10, -60*t + k)
             Q = self.dichuyen(painter, Q, l/40, 30*t + k)
             Q = self.dichuyen(painter, Q, 3*l/10 -
