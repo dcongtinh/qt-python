@@ -3,9 +3,9 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import numpy as np
 import sys
+from math import sqrt, cos, tan
 
 name = 'Bông Tuyết'
-
 
 class Window(QMainWindow):
     def __init__(self):
@@ -13,70 +13,107 @@ class Window(QMainWindow):
         # set the title
         self.setWindowTitle("Buoi03 - Bai03")
         self.setGeometry(300, 150, 900, 800)
+        self.angle = 0
+        self.currentPosition = 0
 
     def paintEvent(self, event):
+        self.angle = 0
+        self.currentPosition = 0
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing, True)
 
         self.drawChumBongTuyet(painter)
 
-    def drawCombine(self, painter, P, Q, kc, angle):
-        P = Q
-        Q = self.dichuyen(P, kc, angle)
-        painter.drawLine(P, Q)
-
     def drawBongTuyet(self, painter, P, l, k):
-        painter.drawEllipse(P, 1, 1)
         x3 = l*np.sqrt(2)/80.
         x1 = x3/np.sin(np.pi*30/180)
         x2 = x3*np.tan(np.pi*60/180)
+        w = (l - x2 - 8*l/10 - x3)/2
+        # move to P
+        self.currentPosition = P
 
-        for t in [1]:  # 1: nhánh trên, -1: nhánh dưới
-            Q = self.dichuyen(painter, P, x1, -30*t + k)
-            y = Q.y()
-            Q = self.dichuyen(painter, Q, l*4/10, 0*t + k)
-            w = (l - x2 - 8*l/10 - x3)/2
-            painter.drawLine(Q, self.dichuyen(painter, Q, w, 0)) # vẽ 1 đoạn nhỏ để coi chơi
-            Q = self.dichuyen(painter, Q, l*3/10, -60*t + k)
-            Q = self.dichuyen(painter, Q, l/40, 30*t + k)
-            Q = self.dichuyen(painter, Q, 3*l/10 -
-                              np.sqrt(w*w - (l*l/1600)), 120*t + k)  # Pytago tính cạch góc vuông
-            Q = self.dichuyen(painter, Q, l*2/10, 0*t + k)
-            Q = self.dichuyen(painter, Q, l*2/10, -60*t + k)
-            Q = self.dichuyen(painter, Q, l/40, 30*t + k)
-            Q = self.dichuyen(painter, Q, 2*l/10 -
-                              np.sqrt(w*w - (l*l)/1600), 120*t + k)  # Pytago tính cạch góc vuông
-            Q = self.dichuyen(painter, Q, l*2/10, 0*t + k)
-            Q = self.dichuyen(painter, Q, l/40, 45*t + k)
+        # k parts
+        for _ in range(0, k):
+            self.xoay(-30)
+            self.dichuyen(painter, x1)
+            self.xoay(30)
+            self.dichuyen(painter, l*4/10)
+            self.xoay(-60)
+            self.dichuyen(painter, l*3/10)
+            self.xoay(90)
+            self.dichuyen(painter, l/40)
+            self.xoay(90)
+            self.dichuyen(painter, l*3/10-l/(40*tan(60*np.pi/180)))
+            self.xoay(-120)
+            self.dichuyen(painter, l/5)
+            self.xoay(-60)
+            self.dichuyen(painter, l/5)
+            self.xoay(90)
+            self.dichuyen(painter, l/40)
+            # painter.drawLine(self.currentPosition, QPointF(self.currentPosition.x(), self.currentPosition.y()+500)) # debug
+            self.xoay(90)
+            self.dichuyen(painter, l/5-l/(40*sqrt(3))) # sqrt(3) = tan(60*np.pi/180)
+            self.xoay(-120)
+            self.dichuyen(painter, l/5)
+
+            # draw top
+            self.xoay(45)
+            self.dichuyen(painter, l/40)
+            self.xoay(90)
+            self.dichuyen(painter, l/40)
+
+            # # draw symmetry shape
+            self.xoay(45)
+            self.dichuyen(painter, l/5)
+            self.xoay(-120)
+            self.dichuyen(painter, l/5-l/(40*sqrt(3)))
+            self.xoay(90)
+            self.dichuyen(painter, l/40)
+            self.xoay(90)
+            self.dichuyen(painter, l/5)
+            self.xoay(-60)
+            self.dichuyen(painter, l/5)
+            self.xoay(-120)
+            self.dichuyen(painter, l*3/10-l/(40*tan(60*np.pi/180)))
+            self.xoay(90)
+            self.dichuyen(painter, l/40)
+            self.xoay(90)
+            self.dichuyen(painter, l*3/10)
+            self.xoay(-60)
+            self.dichuyen(painter, l*2/5)
+            self.xoay(30)
+            self.dichuyen(painter, x1)
+
+            self.xoay(150)
+            self.xoay(360/k)
 
     def drawChumBongTuyet(self, painter):
         x = self.width()/2
         y = self.height()/2
         p = QPoint(x, y)
-        self.drawBongTuyet(painter, p, 400, 0)
+        
+        # recompute for responsiveness
+        L = 0.5 * min(self.width(), self.height())
+        self.drawBongTuyet(painter, p, L, 6)
 
     def dist(self, p, q):
         return np.sqrt((p.x() - q.x())**2 + (p.y() - q.y())**2)
 
-    def dichuyen(self, painter, p, kc, huong):
-        pnew = QPointF()
-        pnew.setX(p.x() + kc*np.cos(np.pi*huong/180))
-        pnew.setY(p.y() + kc*np.sin(np.pi*huong/180))
+    def dichuyen(self, painter, kc):
+        p = self.currentPosition
+        pnew = QPointF(
+            p.x() + kc*np.cos(3.14*self.angle/180),
+            p.y() + kc*np.sin(3.14*self.angle/180)
+        )
         painter.drawLine(p, pnew)
-        return pnew
+        self.currentPosition = pnew
 
-    def doixungX(self, p, y):
-        pnew = QPoint()
-        pnew.setX(p.x())
-        pnew.setY(2*y - p.y())
-
-        return pnew
-
+    def xoay(self, alpha):
+        self.angle += alpha
 
 if __name__ == '__main__':
     # create pyqt5 app
     App = QApplication(sys.argv)
-
     # create the instance of our Window
     window = Window()
     window.show()
