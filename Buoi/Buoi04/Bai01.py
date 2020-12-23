@@ -22,7 +22,7 @@ class Window(QMainWindow):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing, True)
         painter.drawPixmap(
-            self.position, (self.height()-300)/2, 200, 100, self.bmp)
+            self.position, self.height()/2 - 50, 300, 100, self.bmp)
 
     def handleTimer(self):
         self.position += 2
