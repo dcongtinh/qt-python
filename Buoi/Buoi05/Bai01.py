@@ -5,7 +5,7 @@ import numpy as np
 import sys
 from functools import partial
 
-name = 'Vẽ xe'
+name = 'Megan di chuyển'
 
 class Window(QMainWindow):
     def __init__(self):
