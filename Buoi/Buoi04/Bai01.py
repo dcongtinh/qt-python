@@ -18,11 +18,11 @@ class Window(QMainWindow):
         self.position = 0
 
     def paintEvent(self, event):
-        self.position += 1
         painter = QPainter(self)
-        painter.drawPixmap(self.position, 0, 300, 300, self.bmp)
+        painter.drawPixmap(self.position, (self.height()-300)/2, 300, 300, self.bmp)
         
     def handleTimer(self):
+        self.position += 2
         self.repaint()
 
 if __name__ == '__main__':

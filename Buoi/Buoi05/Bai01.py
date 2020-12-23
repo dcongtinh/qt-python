@@ -13,16 +13,26 @@ class Window(QMainWindow):
         # set the title
         self.timer = QTimer()
         self.timer.timeout.connect(self.handleTimer)
-        self.timer.start(200)
-        self.bmp = QPixmap("./Assets/bike.png")
+        self.timer.start(100)
         self.position = 0
 
+        self.megaman = QPixmap("./Assets/megaman.png")
+        self.megamanIndex = 0
+        self.megamanWidth = 33
+        self.scale = 8
+
     def paintEvent(self, event):
-        self.position += 1
         painter = QPainter(self)
-        painter.drawPixmap(self.position, 0, 300, 300, self.bmp)
+        scale = self.scale
+        src = QRect(self.megamanIndex * self.megamanWidth, 0, self.megamanWidth, self.megaman.height())
+        dst = QRect(
+            (self.width()-self.megamanWidth*scale)//2, (self.height()-self.megaman.height()*scale)//2,
+            self.megamanWidth*scale, self.megaman.height()*scale
+        )
+        painter.drawPixmap(dst, self.megaman, src)
         
     def handleTimer(self):
+        self.megamanIndex = (self.megamanIndex + 1) % (self.megaman.width()//self.megamanWidth)
         self.repaint()
 
 if __name__ == '__main__':

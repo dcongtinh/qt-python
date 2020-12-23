@@ -102,6 +102,8 @@ class App(QMainWindow):
             syllabusIndex += 1
 
         self.vLayout = QBoxLayout(QBoxLayout.TopToBottom, self)
+
+        self.exerciseSelectHandler({'syllabus': 'Buoi05', 'exercise': 'Bai03'})
         self.show()
 
     def exerciseSelectHandler(self, config):
