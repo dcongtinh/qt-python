@@ -68,7 +68,8 @@ class App(QMainWindow):
         self.setGeometry(self.left, self.top, self.width, self.height)
         mainMenu = self.menuBar()
         mainMenu.setNativeMenuBar(False)
-
+        mainMenu.setStyleSheet(
+            "padding: 2px 0;font-size: 16px;")
         # load modules from folder /Buoi
         self.modules = modules = moduleToDict(__import__('Buoi'))
 
