@@ -69,7 +69,7 @@ class App(QMainWindow):
         mainMenu = self.menuBar()
         mainMenu.setNativeMenuBar(False)
 
-        # load modules from folder /Buoi 
+        # load modules from folder /Buoi
         self.modules = modules = moduleToDict(__import__('Buoi'))
 
         # add data to menus
@@ -103,7 +103,8 @@ class App(QMainWindow):
 
         self.vLayout = QBoxLayout(QBoxLayout.TopToBottom, self)
 
-        # self.exerciseSelectHandler({'syllabus': 'Buoi03', 'exercise': 'BaiBonus'})
+        self.exerciseSelectHandler(
+            {'syllabus': 'Khac', 'exercise': 'Home'})
         self.show()
 
     def exerciseSelectHandler(self, config):
@@ -113,13 +114,15 @@ class App(QMainWindow):
             # delete it in current window
             self.currentExerciseWindow.deleteLater()
 
-        # allocate new window 
+        # allocate new window
         self.currentExerciseWindow = window = exercise.Window()
         self.vLayout.addWidget(window)
         self.setCentralWidget(window)
 
         # set current title
-        self.setWindowTitle('Đồ hoạ máy tính - %s' % getattr(exercise, 'name', config['exercise']))
+        self.setWindowTitle('Đồ hoạ máy tính - %s' %
+                            getattr(exercise, 'name', config['exercise']))
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

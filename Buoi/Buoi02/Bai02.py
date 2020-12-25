@@ -26,7 +26,7 @@ class Window(QMainWindow):
             painter.setBrush(
                 QColor(np.random.randint(255), np.random.randint(255), np.random.randint(255)))
             painter.drawEllipse(np.random.randint(
-                1000), np.random.randint(1000), 3, 3)
+                self.width()), np.random.randint(self.height()), 3, 3)
 
 
 if __name__ == '__main__':

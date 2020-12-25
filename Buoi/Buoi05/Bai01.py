@@ -33,7 +33,8 @@ class Window(QMainWindow):
         # Tạo một cửa sổ có tọa độ và kích thước phù hơp vói ảnh nhỏ
         displayWindow = QRect(w_img*self.img, 0, w_img, h_img)
 
-        position = QRect(self.position * r, self.height()/2, w_img*2, h_img*2)
+        position = QRect(self.position * r, self.height() /
+                         2 - 100, w_img*3, h_img*3)
         painter.drawPixmap(position, spritesheet, displayWindow)
 
     def handleTimer(self):
