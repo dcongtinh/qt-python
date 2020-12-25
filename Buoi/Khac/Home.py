@@ -147,11 +147,13 @@ class Window(QMainWindow):
         painter.setPen(Qt.white)
         painter.drawRect(0, 0, self.width(), self.height())
 
-        painter.setPen(Qt.black)
-        painter.setOpacity(0.075)
+        painter.setPen(QColor('#00a8ff'))
+        painter.setOpacity(0.08)
         for flake in self.flakes:
             self.drawSnowflake(painter, flake.position,
                                flake.size, 6, self.angle)
+
+        painter.setPen(Qt.black)
         painter.setOpacity(1)
         self.drawText(painter)
 
