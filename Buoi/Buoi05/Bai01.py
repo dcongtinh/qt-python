@@ -38,10 +38,10 @@ class Window(QMainWindow):
         painter.drawPixmap(position, spritesheet, displayWindow)
 
     def handleTimer(self):
-        self.position += 1
-        self.img += 1
-        if self.img == 10:
-            self.img = 0
+        if self.position < self.width()/2:
+            self.position += 1
+        # 10 frames
+        self.img = (self.img + 1) % 10
         self.repaint()
 
 

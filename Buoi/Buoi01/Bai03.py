@@ -17,7 +17,7 @@ class Window(QMainWindow):
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing, True)
-
+        painter.translate((self.width()-150) // 2, (self.height()-225) // 2)
         self.drawHouse(painter)
 
     def drawHouse(self, painter):
