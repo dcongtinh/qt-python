@@ -1,6 +1,7 @@
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
+from PyQt5.QtMultimedia import *
 import numpy as np
 import sys
 from functools import partial
@@ -29,6 +30,18 @@ class Window(QMainWindow):
 
         self.currentPosition = None
         self.angle = 0
+
+        # additional setup
+        self.player = QMediaPlayer()
+        # play sound
+        # find desired path
+        theme_song_path = QDir.current().absoluteFilePath('Assets/theme_song.mp3')
+
+        # load file and play
+        sound = QMediaContent(QUrl.fromLocalFile(theme_song_path))
+        self.player.setMedia(sound)
+        self.player.setVolume(100)
+        self.player.play()
 
     def dichuyen(self, painter, kc, drawLine=True):
         p = self.currentPosition

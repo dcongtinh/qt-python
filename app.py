@@ -9,7 +9,8 @@ from PyQt5.QtCore import *
 from functools import partial
 import sys
 import types
-
+from PyQt5.QtMultimedia import *
+# import vlc
 
 def moduleToDict(module):
     ''' Convert to dict for easier accesss
