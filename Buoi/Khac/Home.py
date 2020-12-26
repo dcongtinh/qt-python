@@ -33,19 +33,20 @@ class Window(QMainWindow):
         self.angle = 0
 
         # additional setup
-        
+
         # play sound with loops
         self.player = QMediaPlayer()
         self.playlist = QMediaPlaylist()
         # append theme song to playlist
         theme_song_path = QDir.current().absoluteFilePath('Assets/theme_song.mp3')
-        self.playlist.addMedia(QMediaContent(QUrl.fromLocalFile(theme_song_path)))
+        self.playlist.addMedia(QMediaContent(
+            QUrl.fromLocalFile(theme_song_path)))
         self.playlist.setPlaybackMode(QMediaPlaylist.Loop)
         # new player and play the list with loops
         self.player = QMediaPlayer()
         self.player.setPlaylist(self.playlist)
         self.player.play()
-        
+
     def dichuyen(self, painter, kc, drawLine=True):
         p = self.currentPosition
         pnew = QPointF(
@@ -152,8 +153,8 @@ class Window(QMainWindow):
         fm = QFontMetrics(font)
         fwidth = fm.width(st)
         fheight = fm.height()
-        path.addText(QPoint(self.width()/2-fwidth/2,
-                            self.height()/2 + fheight/4 + 260), font, st)
+        path.addText(QPoint(self.width()/2 - fwidth/2,
+                            self.height() - fheight/4 - 20), font, st)
         painter.setBrush(Qt.black)
         painter.drawPath(path)
 
@@ -176,7 +177,7 @@ class Window(QMainWindow):
     def newFlake(self, pos=None):
         size = randint(2, 6)*10
         if not pos:
-            pos = QPointF(randint(0, self.width()), -size*2) 
+            pos = QPointF(randint(0, self.width()), -size*2)
         flake = Snowflake(
             position=pos,
             size=size,
