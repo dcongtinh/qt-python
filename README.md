@@ -12,3 +12,6 @@ Cấu trúc thư mục
 |---__init.py__
 ```
 Xem mẫu trong các folder để config file ```__init__.py``` cho các thư mục
+
+Dependencies: Xem trong requirements.txt
+Cài đặt dependencies: `` pip3 install -r requirements.txt ``
