@@ -208,7 +208,6 @@ class Window(QMainWindow):
 
         self.repaint()
 
-
 if __name__ == '__main__':
     # create pyqt5 app
     App = QApplication(sys.argv)

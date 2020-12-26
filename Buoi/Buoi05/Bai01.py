@@ -21,11 +21,20 @@ class Window(QMainWindow):
         self.h_img = self.spritesheet.height()
         self.delta = 10
         self.frameIndex = 0
-        
+
+        # these vars are auto configured
+        self.lineWidth = 0
+        self.Xs = []
 
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing, True)
+        # draw lines
+        for X in self.Xs:
+            painter.drawLine(X-self.lineWidth//2, self.height()//2-50, X+self.lineWidth//2, self.height()//2-50)
+            painter.drawLine(X-self.lineWidth//2-50, self.height()//2+50, X+self.lineWidth//2-50, self.height()//2+50)
+
+        # draw megaman
         self.drawMegaman(painter)
 
     def drawMegaman(self, painter):
@@ -35,9 +44,20 @@ class Window(QMainWindow):
         painter.drawPixmap(position, self.spritesheet, displayWindow)
 
     def handleTimer(self):
-        if self.position > self.width() + self.w_img:
-            self.position = - self.w_img - self.delta * 2
-        self.position += self.delta
+        self.lineWidth = self.width() // 4
+        if not self.Xs:
+            start = self.width()//8
+            for _ in range(6):
+                self.Xs.append(start)
+                start += self.lineWidth + 30
+        if self.position >= self.width() // 2:
+            for i in range(len(self.Xs)):
+                self.Xs[i] -= self.delta
+                if self.Xs[i] + self.lineWidth < 0:
+                    self.Xs[i] = self.Xs[-1] + self.lineWidth + 20
+                    self.Xs[i], self.Xs[-1] = self.Xs[-1], self.Xs[i]
+        else:
+            self.position += self.delta
         # 10 frames
         self.frameIndex = (self.frameIndex + 1) % 10
         self.repaint()
