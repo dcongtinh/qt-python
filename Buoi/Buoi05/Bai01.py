@@ -16,32 +16,30 @@ class Window(QMainWindow):
         self.timer.timeout.connect(self.handleTimer)
         self.timer.start(100)
         self.position = 0
-        self.img = 0
+        self.spritesheet = QPixmap("./Assets/Megaman.png")
+        self.w_img = self.spritesheet.width()/10
+        self.h_img = self.spritesheet.height()
+        self.delta = 10
+        self.frameIndex = 0
+        
 
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing, True)
-
         self.drawMegaman(painter)
 
     def drawMegaman(self, painter):
-        spritesheet = QPixmap("./Assets/Megaman.png")
-        w_img = spritesheet.width()/10
-        h_img = spritesheet.height()
-
-        r = 10
         # Tạo một cửa sổ có tọa độ và kích thước phù hơp vói ảnh nhỏ
-        displayWindow = QRect(w_img*self.img, 0, w_img, h_img)
-
-        position = QRect(self.position * r, self.height() /
-                         2 - 100, w_img*3, h_img*3)
-        painter.drawPixmap(position, spritesheet, displayWindow)
+        displayWindow = QRect(self.w_img*self.frameIndex, 0, self.w_img, self.h_img)
+        position = QRect(self.position, self.height() / 2 - 100, self.w_img*3, self.h_img*3)
+        painter.drawPixmap(position, self.spritesheet, displayWindow)
 
     def handleTimer(self):
-        if self.position < self.width()/2:
-            self.position += 1
+        if self.position > self.width() + self.w_img:
+            self.position = - self.w_img - self.delta * 2
+        self.position += self.delta
         # 10 frames
-        self.img = (self.img + 1) % 10
+        self.frameIndex = (self.frameIndex + 1) % 10
         self.repaint()
 
 

@@ -12,10 +12,11 @@ name = 'Hello, World!!!'
 
 
 class Snowflake:
-    def __init__(self, position, size, angle):
+    def __init__(self, position, size, angle, opacity=1.0):
         self.position = position
         self.size = size
         self.angle = angle
+        self.opacity = opacity
 
 
 class Window(QMainWindow):
@@ -161,8 +162,8 @@ class Window(QMainWindow):
         painter.drawRect(0, 0, self.width(), self.height())
 
         painter.setPen(QColor('#00a8ff'))
-        painter.setOpacity(0.08)
         for flake in self.flakes:
+            painter.setOpacity(flake.opacity)
             self.drawSnowflake(painter, flake.position,
                                flake.size, 6, self.angle)
 
@@ -173,11 +174,12 @@ class Window(QMainWindow):
     def newFlake(self, pos=None):
         size = randint(2, 6)*10
         if not pos:
-            pos = QPointF(randint(0, self.width()), -size*2)
+            pos = QPointF(randint(0, self.width()), -size*2) 
         flake = Snowflake(
             position=pos,
             size=size,
-            angle=randint(0, 180)
+            angle=randint(0, 180),
+            opacity=randint(5, 30)/100
         )
         return flake
 
