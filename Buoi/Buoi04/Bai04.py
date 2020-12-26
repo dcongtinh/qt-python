@@ -53,16 +53,6 @@ class Window(QMainWindow):
         painter.fillRect(0, 0, width(), height(), Qt::black);
         '''
 
-        # update earch angle
-        self.earthAngle += 2
-        if self.earthAngle > 360:
-            self.earthAngle -= 360
-
-        # update moon angle
-        self.moonAngle += 4
-        if self.moonAngle > 360:
-            self.moonAngle -= 360
-
         # draw sun
         center = QPoint(self.width()/2, self.height()/2)
         painter.drawPixmap(center.x()-50, center.y()-50, 100, 100, self.sunBmp)
@@ -88,6 +78,16 @@ class Window(QMainWindow):
                            moonCenter.y()-10, 20, 20, self.moonBmp)
 
     def handleTimer(self):
+        # update earch angle
+        self.earthAngle += 2
+        if self.earthAngle > 360:
+            self.earthAngle -= 360
+
+        # update moon angle
+        self.moonAngle += 4
+        if self.moonAngle > 360:
+            self.moonAngle -= 360
+
         self.repaint()
 
 

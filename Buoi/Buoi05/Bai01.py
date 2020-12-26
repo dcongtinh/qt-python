@@ -14,7 +14,7 @@ class Window(QMainWindow):
         # set the title
         self.timer = QTimer()
         self.timer.timeout.connect(self.handleTimer)
-        self.timer.start(100)
+        self.timer.start(80)
         self.position = 0
         self.spritesheet = QPixmap("./Assets/Megaman.png")
         self.w_img = self.spritesheet.width()/10
@@ -52,12 +52,12 @@ class Window(QMainWindow):
                 start += self.lineWidth + 30
         if self.position >= self.width() // 2:
             for i in range(len(self.Xs)):
-                self.Xs[i] -= self.delta
+                self.Xs[i] -= self.delta*2
                 if self.Xs[i] + self.lineWidth < 0:
                     self.Xs[i] = self.Xs[-1] + self.lineWidth + 20
                     self.Xs[i], self.Xs[-1] = self.Xs[-1], self.Xs[i]
         else:
-            self.position += self.delta
+            self.position += self.delta*2
         # 10 frames
         self.frameIndex = (self.frameIndex + 1) % 10
         self.repaint()
