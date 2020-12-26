@@ -33,17 +33,19 @@ class Window(QMainWindow):
         self.angle = 0
 
         # additional setup
+        
+        # play sound with loops
         self.player = QMediaPlayer()
-        # play sound
-        # find desired path
+        self.playlist = QMediaPlaylist()
+        # append theme song to playlist
         theme_song_path = QDir.current().absoluteFilePath('Assets/theme_song.mp3')
-
-        # load file and play
-        sound = QMediaContent(QUrl.fromLocalFile(theme_song_path))
-        self.player.setMedia(sound)
-        self.player.setVolume(100)
+        self.playlist.addMedia(QMediaContent(QUrl.fromLocalFile(theme_song_path)))
+        self.playlist.setPlaybackMode(QMediaPlaylist.Loop)
+        # new player and play the list with loops
+        self.player = QMediaPlayer()
+        self.player.setPlaylist(self.playlist)
         self.player.play()
-
+        
     def dichuyen(self, painter, kc, drawLine=True):
         p = self.currentPosition
         pnew = QPointF(
