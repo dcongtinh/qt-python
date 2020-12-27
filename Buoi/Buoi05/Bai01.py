@@ -31,16 +31,20 @@ class Window(QMainWindow):
         painter.setRenderHint(QPainter.Antialiasing, True)
         # draw lines
         for X in self.Xs:
-            painter.drawLine(X-self.lineWidth//2, self.height()//2-50, X+self.lineWidth//2, self.height()//2-50)
-            painter.drawLine(X-self.lineWidth//2-50, self.height()//2+50, X+self.lineWidth//2-50, self.height()//2+50)
+            painter.drawLine(X-self.lineWidth//2, self.height() //
+                             2-50, X+self.lineWidth//2, self.height()//2-50)
+            painter.drawLine(X-self.lineWidth//2-50, self.height() //
+                             2+50, X+self.lineWidth//2-50, self.height()//2+50)
 
         # draw megaman
         self.drawMegaman(painter)
 
     def drawMegaman(self, painter):
         # Tạo một cửa sổ có tọa độ và kích thước phù hơp vói ảnh nhỏ
-        displayWindow = QRect(self.w_img*self.frameIndex, 0, self.w_img, self.h_img)
-        position = QRect(self.position, self.height() / 2 - 100, self.w_img*3, self.h_img*3)
+        displayWindow = QRect(self.w_img*self.frameIndex,
+                              0, self.w_img, self.h_img)
+        position = QRect(self.position, self.height() / 2 -
+                         100, self.w_img*3, self.h_img*3)
         painter.drawPixmap(position, self.spritesheet, displayWindow)
 
     def handleTimer(self):
@@ -50,7 +54,7 @@ class Window(QMainWindow):
             for _ in range(6):
                 self.Xs.append(start)
                 start += self.lineWidth + 30
-        if self.position >= self.width() // 2:
+        if self.position >= self.width() // 2 - 50:
             for i in range(len(self.Xs)):
                 self.Xs[i] -= self.delta*2
                 if self.Xs[i] + self.lineWidth < 0:

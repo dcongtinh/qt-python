@@ -124,7 +124,7 @@ class Window(QMainWindow):
 
     def drawText(self, painter):
         fontFamily = "CMU Serif, Arial"
-        font = QFont(fontFamily, 60)
+        font = QFont(fontFamily, 48)
         path = QPainterPath()
         st = 'Thực hành'
         fm = QFontMetrics(font)
@@ -133,6 +133,7 @@ class Window(QMainWindow):
         path.addText(QPoint(self.width()/2-fwidth/2,
                             self.height()/2 + fheight/4 - 120), font, st)
 
+        font = QFont(fontFamily, 60)
         st = 'Đồ Hoạ Máy Tính'
         fm = QFontMetrics(font)
         fwidth = fm.width(st)
@@ -208,6 +209,7 @@ class Window(QMainWindow):
             flakes[i].position = curPos
 
         self.repaint()
+
 
 if __name__ == '__main__':
     # create pyqt5 app
