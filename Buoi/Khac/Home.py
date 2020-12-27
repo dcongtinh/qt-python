@@ -193,7 +193,7 @@ class Window(QMainWindow):
             # generate stars
             for i in range(self.maxSnowflake):
                 self.flakes.append(self.newFlake(pos=QPointF(
-                    randint(0, self.width()), randint(0, self.width()))))
+                    randint(0, self.width()), randint(0, self.height()))))
         # calculate target color of stars for next frame
         for i in range(len(flakes)):
             flakes[i].angle += 3

@@ -10,7 +10,6 @@ from functools import partial
 import sys
 import types
 from PyQt5.QtMultimedia import *
-# import vlc
 
 def moduleToDict(module):
     ''' Convert to dict for easier accesss
@@ -40,12 +39,12 @@ def moduleToDict(module):
             if typeAttr == types.ModuleType:
                 modules[attr] = getattr(module, attr)
         return modules
-    syllabus = getModule(module)
-    for key in syllabus:
+    units = getModule(module)
+    for key in units:
         if key == 'name':
             continue
-        syllabus[key] = getModule(syllabus[key])
-    return syllabus
+        units[key] = getModule(units[key])
+    return units
 
 
 class App(QMainWindow):
@@ -71,47 +70,39 @@ class App(QMainWindow):
         mainMenu.setNativeMenuBar(False)
         mainMenu.setStyleSheet(
             "padding: 2px 0;font-size: 16px;")
+
+        import Buoi
         # load modules from folder /Buoi
-        self.modules = modules = moduleToDict(__import__('Buoi'))
+        self.modules = modules = moduleToDict(Buoi)
 
         # add data to menus
-        syllabus = []
-        for alias in modules:
-            if alias != 'name':
-                syllabus.append(alias)
+        for unit in modules:
+            subMenu = mainMenu.addMenu(modules[unit].get('name', unit))
 
-        syllabusIndex = 0
-        for syl in syllabus:
-            subMenu = mainMenu.addMenu(modules[syl].get('name', syl))
-            exerciseIndex = 0
-            exercises = []
-            for alias in modules[syl]:
-                if alias != 'name':
-                    exercises.append(alias)
-            # traverse through exercises in each syllabus
-            for sub in exercises:
+            # traverse through exercises in each units
+            for sub in modules[unit]:
+                if sub == 'name':
+                    continue
                 exerciseSelectAction = QAction(
-                    getattr(modules[syl][sub], 'name', sub), self)
+                    getattr(modules[unit][sub], 'name', sub), self)
                 # connect to actions
                 exerciseSelectAction.triggered.connect(
                     partial(
                         self.exerciseSelectHandler,
-                        {'syllabus': syl, 'exercise': sub}
+                        {'units': unit, 'exercise': sub}
                     )
                 )
                 subMenu.addAction(exerciseSelectAction)
-                exerciseIndex += 1
-            syllabusIndex += 1
 
         self.vLayout = QBoxLayout(QBoxLayout.TopToBottom, self)
 
         self.exerciseSelectHandler(
-            {'syllabus': 'Khac', 'exercise': 'Home'})
+            {'units': 'Khac', 'exercise': 'Home'})
         self.show()
 
     def exerciseSelectHandler(self, config):
         # load exercise first
-        exercise = self.modules[config['syllabus']][config['exercise']]
+        exercise = self.modules[config['units']][config['exercise']]
         if self.currentExerciseWindow:
             # delete it in current window
             self.currentExerciseWindow.deleteLater()
