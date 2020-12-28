@@ -1,13 +1,15 @@
+import sys
+import numpy as np
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-import numpy as np
-import sys
 
 # Config tên này để đổi tên trên menu
 name = 'Hình vuông nội tiếp hình tròn'
 
 # Class Window cần phải có
+
+
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()

@@ -1,8 +1,8 @@
+import sys
+import numpy as np
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-import numpy as np
-import sys
 
 # Config tên này để đổi tên trên menu
 name = 'Hàng rào'

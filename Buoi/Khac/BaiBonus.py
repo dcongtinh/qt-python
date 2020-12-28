@@ -1,11 +1,12 @@
+import sys
+import numpy as np
+from math import tan, sqrt
+from random import randint
+
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-import numpy as np
-import sys
-from functools import partial
-from math import cos, sin, tan, sqrt
-from random import randint
+
 
 name = 'Hoa tuyết rơi'
 

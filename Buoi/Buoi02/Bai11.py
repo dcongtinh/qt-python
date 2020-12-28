@@ -1,12 +1,13 @@
+import sys
+import time
+import random
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-import numpy as np
-import sys
-import random 
-import time 
+
 
 name = 'Sierpinski Gasket'
+
 
 class Window(QMainWindow):
     def __init__(self):
@@ -26,12 +27,12 @@ class Window(QMainWindow):
         p2 = QPoint(self.width()/4, 3*self.height()/4 + 100)
         p3 = QPoint(3*self.width()/4, 3*self.height()/4 + 100)
         p = [p1, p2, p3]
-        idx = random.randrange(0, 3) 
+        idx = random.randrange(0, 3)
         g = p[idx]
         painter.drawEllipse(g, 1, 1)
 
         for i in range(10000):
-            idx = random.randrange(0, 3) 
+            idx = random.randrange(0, 3)
             p_rand = p[idx]
             g = QPointF((g.x() + p_rand.x())/2, (g.y() + p_rand.y())/2)
             painter.drawEllipse(g, 1, 1)

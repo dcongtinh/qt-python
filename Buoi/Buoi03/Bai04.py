@@ -1,9 +1,9 @@
+import sys
+import numpy as np
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-import numpy as np
-import sys
-from math import sqrt, cos, tan
+from math import sqrt, tan
 
 name = 'Bông Tuyết'
 
